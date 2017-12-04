@@ -1,0 +1,45 @@
+ab -c 10 -n 1000 "http://127.0.0.1:8081/ask/hello?name=Nastya" > ../benchmark/dynamic_gunicorn_direct.log
+
+
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+
+
+Server Software:        gunicorn/19.7.1
+Server Hostname:        127.0.0.1
+Server Port:            8081
+
+Document Path:          /ask/hello?name=Nastya
+Document Length:        47 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.617 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      236000 bytes
+HTML transferred:       47000 bytes
+Requests per second:    1619.66 [#/sec] (mean)
+Time per request:       6.174 [ms] (mean)
+Time per request:       0.617 [ms] (mean, across all concurrent requests)
+Transfer rate:          373.28 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.4      0       5
+Processing:     3    6   3.1      5      27
+Waiting:        0    6   2.9      5      27
+Total:          3    6   3.1      5      27
+
+Percentage of the requests served within a certain time (ms)
+  50%      5
+  66%      7
+  75%      8
+  80%      8
+  90%     10
+  95%     12
+  98%     15
+  99%     20
+ 100%     27 (longest request)

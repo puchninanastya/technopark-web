@@ -1,0 +1,44 @@
+ab -c 10 -n 1000 "http://127.0.0.1/ask/hello?name=Nastya" > ../benchmark/dynamic_gunicorn_nginx.log
+
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+
+
+Server Software:        nginx/1.10.3
+Server Hostname:        127.0.0.1
+Server Port:            80
+
+Document Path:          /ask/hello?name=Nastya
+Document Length:        47 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.754 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      242000 bytes
+HTML transferred:       47000 bytes
+Requests per second:    1326.47 [#/sec] (mean)
+Time per request:       7.539 [ms] (mean)
+Time per request:       0.754 [ms] (mean, across all concurrent requests)
+Transfer rate:          313.48 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.2      0       3
+Processing:     1    7   3.8      7      71
+Waiting:        1    7   3.8      7      71
+Total:          3    7   3.8      7      71
+
+Percentage of the requests served within a certain time (ms)
+  50%      7
+  66%      8
+  75%      9
+  80%     10
+  90%     11
+  95%     13
+  98%     15
+  99%     17
+ 100%     71 (longest request)
