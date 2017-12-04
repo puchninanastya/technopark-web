@@ -1,0 +1,1 @@
+gunicorn -c mysimple_gunicorn_config.py mysimple_wsgi:MySimpleStaticApp
