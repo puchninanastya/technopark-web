@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.core.urlresolvers import reverse
+from django.http import Http404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #TEST DATA
 QUESTIONS = {
@@ -32,53 +35,69 @@ def hello(request):
 		return output_str("No params!\n")
 	return HttpResponse(output_str)
 
-def paginate(objects_list, num_objects_on_list, current_page):
-	paginator = Paginator(objects_list, num_objects_on_list)
-	page_range = paginator.page_range
-
+def paginate(request, qs):
 	try:
-		result_current_page = int(current_page)
+		limit = int(request.GET.get('limit', 2))
 	except ValueError:
-		result_current_page = 1
+		limit = 10
+	if limit > 100:
+		limit = 10
+	try:
+		page = int(request.GET.get('page', 1))
+	except ValueError:
+		raise Http404
+	paginator = Paginator(qs, limit)
+	try:
+		page = paginator.page(page)
+	except EmptyPage:
+		page = paginator.page(paginator.num_pages)
+	return page, paginator
 
-	if (result_current_page > paginator.num_pages):
-		result_current_page = paginator.num_pages
-
-	return paginator.page(result_current_page), page_range
-
-def newQuestions(request, page=1):
+def newQuestions(request):
 	questionsValues = QUESTIONS.values()
-	questions, pr = paginate(questionsValues, 2, page)
+	page, paginator = paginate(request, questionsValues)
+	paginator.baseurl = reverse('new-questions')
 	context = {
-		'questions': questions,
-		'page_range': pr,
-		'page_url_name': 'new-questions-page',
+		'questions': page.object_list,
+		'page': page,
+		'paginator': paginator,
 	}
 	return render(request, 'questions_list.html', context)
 
-def hotQuestions(request, page=1):
+def hotQuestions(request):
 	questionsValues = QUESTIONS.values()
-	questions, pr = paginate(questionsValues, 2, page)
+	page, paginator = paginate(request, questionsValues)
+	paginator.baseurl =  reverse('hot-questions')
 	context = {
-		'questions': questions,
-		'page_range': pr,
-		'page_url_name': 'hot-questions-page',
+		'questions': page.object_list,
+		'page': page,
+		'paginator': paginator,
 	}
 	return render(request, 'questions_list.html', context)
 
-def tagQuestions(request, tagname, page=1):
-	questions = QUESTIONS.values()
-	return render(request, 'tag_questions.html', {"questions": questions})
+def tagQuestions(request, tagname):
+	questionsValues = QUESTIONS.values()
+	tag = {'title': tagname}
+	page, paginator = paginate(request, questionsValues)
+	paginator.baseurl =  reverse('tag-questions', kwargs={'tagname': tagname})
+	context = {
+		'questions': page.object_list,
+		'page': page,
+		'paginator': paginator,
+		'tag': tag
+	}
+	return render(request, 'tag_questions.html', context)
 
-def question(request, qid, page=1):
+def question(request, qid):
 	question = QUESTIONS.get(qid, {})
 	answersValues = ANSWERS.values()
-	answers,pr = paginate(answersValues, 2, page)
+	page, paginator = paginate(request, answersValues)
+	paginator.baseurl = reverse('question', kwargs={'qid': qid})
 	context = {
 		'question': question,
-		'answers': answers,
-		'page_range': pr,
-		'page_url_name': 'question-page',
+		'answers': page.object_list,
+		'page': page,
+		'paginator': paginator,
 	}
 	return render(request, 'question.html', context)
 
