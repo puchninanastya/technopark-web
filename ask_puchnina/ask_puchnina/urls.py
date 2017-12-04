@@ -35,6 +35,6 @@ urlpatterns = [
     url(r'^login/$', views.login, name='login'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^settings/$', views.settings, name='settings'),
-    url(r'^admin/$', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
     url(r'^$', views.newQuestions, name='index'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
