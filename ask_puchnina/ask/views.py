@@ -48,7 +48,7 @@ def paginate(objects_list, num_objects_on_list, current_page):
 
 def newQuestions(request, page=1):
 	questionsValues = QUESTIONS.values()
-	questions, pr = Paginate(questionsValues, 2, page)
+	questions, pr = paginate(questionsValues, 2, page)
 	context = {
 		'questions': questions,
 		'page_range': pr,
@@ -58,7 +58,7 @@ def newQuestions(request, page=1):
 
 def hotQuestions(request, page=1):
 	questionsValues = QUESTIONS.values()
-	questions, pr = Paginate(questionsValues, 2, page)
+	questions, pr = paginate(questionsValues, 2, page)
 	context = {
 		'questions': questions,
 		'page_range': pr,
@@ -73,7 +73,7 @@ def tagQuestions(request, tagname, page=1):
 def question(request, qid, page=1):
 	question = QUESTIONS.get(qid, {})
 	answersValues = ANSWERS.values()
-	answers,pr = Paginate(answersValues, 2, page)
+	answers,pr = paginate(answersValues, 2, page)
 	context = {
 		'question': question,
 		'answers': answers,
