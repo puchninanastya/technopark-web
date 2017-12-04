@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %} Question {% endblock %}
+
+{% block pagecontent %}
+
+{% include "question_block.html" %}
+<hr>
+
+{% for current_answer in answers %}
+  {% include "answer_block.html" with answer=current_answer %}
+{% endfor %}
+
+{# TODO: paginator #}
+
+<div class="newanswer-block">
+	<form>
+		<div class="form-group">
+			<label for="input-answer">Your answer:</label>
+			<textarea class="form-control" id="input-text" rows="6" placeholder="Enter your answer"></textarea>
+		</div>
+		<button type="submit" class="btn btn-primary btn-block">Anwer!</button>
+	</form>
+</div>
+
+{% endblock %}

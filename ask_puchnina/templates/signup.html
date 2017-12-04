@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %} Sign up {% endblock %}
+
+{% block pagecontent %}
+
+<h2>Sign up</h2>
+<form>
+	<div class="form-group row">
+		<div class="alert alert-danger col-sm-6" role="alert">
+      Sorry, this email address already exists!
+    </div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-2 col-form-label" for="input-input">Login</label>
+		<div class="col-sm-10 col-md-4">
+			<input type="text" class="form-control" name="login" id="input-login" placeholder="Enter login">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-2 col-form-label" for="input-input">Email</label>
+		<div class="col-sm-10 col-md-4">
+			<input type="email" class="form-control" name="email" id="input-email" placeholder="Enter email address">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-2 col-form-label" for="input-nickname">NickName</label>
+		<div class="col-sm-10 col-md-4">
+			<input type="text" class="form-control" name="nickname" id="input-nickname" placeholder="Enter nickname">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-2 col-form-label" for="input-password">Password</label>
+		<div class="col-sm-10 col-md-4">
+			<input type="password" class="form-control" name="password" id="input-password" placeholder="Enter password">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-2 col-form-label" for="input-password">Password repeat</label>
+		<div class="col-sm-10 col-md-4">
+			<input type="password" class="form-control" name="password" id="input-password" placeholder="Repeat password">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-2 col-form-label" for="input-file">Upload avatar</label>
+		<div class="col-sm-10 col-md-4">
+			<input type="file" id="input-file">
+		</div>
+	</div>
+	<div class="form-group row">
+    <div class="col-sm-offset-2 col-sm-2 col-xs-12">
+      <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

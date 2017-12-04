@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %} Questions {% endblock %}
+
+{% block pagecontent %}
+
+  {% include "questions_nav.html" %}
+  {% csrf_token %}
+  {% for current_question in questions %}
+    {% include "question_block.html" with question=current_question %}
+  {% endfor %}
+
+  {% include "pagination.html" with objects_pg=questions %}
+
+{% endblock %}

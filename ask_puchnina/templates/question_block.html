@@ -1,0 +1,39 @@
+{% load static %}
+<div class="question-block">
+  <div class="row">
+    <div class="left col-xs-4 col-sm-2">
+      <div class="question-info centered">
+        <img src="{% static 'img/avatar.gif' %}" alt="User logo" class="img-responsive">
+        Question rating:
+        <div class="rating">
+          <a href="#"><i class="glyphicon glyphicon-thumbs-up"></i></a>
+            {{ question.rating }}
+          <a href="#"><i class="glyphicon glyphicon-thumbs-down"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-8 col-sm-10">
+      <div class="question-body">
+        <div class="question-header">
+          <a href="{% url 'question' qid=question.id %}">{{ question.title }}</a>
+        </div>
+        <div class="question-content">
+          <p>{{ question.text }}</p>
+        </div>
+      </div>
+      <div class="question-meta">
+        <span>
+          <a href="#">
+            Answers <span>({{ question.answers_number }})</span>
+          </a>
+        </span>
+        <span class="tags">
+          Tags:
+          {% for tag in question.tags.all %}
+          <a href="#">{{ tag.title }}</a>
+          {% endfor %}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

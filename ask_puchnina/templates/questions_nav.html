@@ -1,0 +1,16 @@
+{% url 'index' as indexurl %}
+{% url 'new-questions-index' as newquestionsindexurl %}
+{% url 'new-questions-page' as newquestionspageurl %}
+{% url 'hot-questions-index' as hotquestionsindexurl %}
+{% url 'hot-questions-page' as hotquestionspageurl %}
+
+<ul class="questions-nav">
+  <li {% if request.path  ==  newquestionsindexurl or request.path  ==  indexurl %} class="active" {% endif %}
+      {% if request.path  ==  newquestionspageurl %} class="active" {% endif %}>
+    <a href={{ newquestionsindexurl }}><span>New Questions</span></a>
+  </li>
+  <li {% if request.path  ==  hotquestionsindexurl %} class="active" {% endif %}
+      {% if request.path  ==  hotquestionspageurl %} class="active" {% endif %}>
+    <a href={{ hotquestionsindexurl }}><span>Hot Questions</span></a>
+  </li>
+</ul>

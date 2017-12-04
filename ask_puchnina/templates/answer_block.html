@@ -1,0 +1,40 @@
+<div class="answer-block">
+	<div class="row">
+		<div class="left col-xs-2 col-md-2">
+			<div class="answer-info">
+				<img src="img/user.jpg" alt="User logo" class="img-responsive">
+				Answer rating:
+				<div class="rating">
+					<a href="#"><i class="glyphicon glyphicon-thumbs-up"></i></a>
+					{{ answer.rating }}
+					<a href="#"><i class="glyphicon glyphicon-thumbs-down"></i></a>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-10 col-md-10">
+			<div class="answer-body">
+				<p>{{ answer.text }}</p>
+			</div>
+			<div class="answer-iscorrect">
+				<div class="form-check">
+					<form>
+						{% comment %}
+						{% if user... %}
+						  <label class="form-check-label">
+						    <input class="form-check-input" type="checkbox" value="" checked>
+						    Correct answer!
+						  </label>
+						{% else %}
+						{% endcomment %}
+						{% if answer.correct %}
+							<label>Correct anwer!</label>
+						{% else %}
+							<label>Uncorrect answer</label>
+						{% endif %}
+					{# {% endif %} #}
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

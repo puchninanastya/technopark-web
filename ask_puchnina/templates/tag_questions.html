@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} Tag: {{ tag.title }}{% endblock %}
+
+{% block pagecontent %}
+<h2>Tag: {{ tag.title }}</h2>
+
+{% for question in questions %}
+  {% include "question_block.html" %}
+{% endfor %}
+
+{# TODO: paginator #}
+
+{% endblock %}
